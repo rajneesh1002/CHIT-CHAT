@@ -1,5 +1,5 @@
  
-import { Send } from 'lucide-react';
+import { Image, Send } from 'lucide-react';
 import { THEMES } from '../constants';
 import { useThemeStore } from '../store/useThemeStore';
 
@@ -57,10 +57,10 @@ const SettingsPage = () => {
                 <div className="px-4 py-3 border-b border-base-300 bg-base-100">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium">
-                      J
+                      C
                     </div>
                     <div>
-                      <h3 className="font-medium text-sm">John Doe</h3>
+                      <h3 className="font-medium text-sm">ChitChat-user</h3>
                       <p className="text-xs text-base-content/70">Online</p>
                     </div>
                   </div>
@@ -103,6 +103,9 @@ const SettingsPage = () => {
                       value="This is a preview"
                       readOnly
                     />
+                    <button className="flex btn btn-circle text-zinc-400">
+                      <Image size={20} />
+                    </button>
                     <button className="btn btn-primary h-10 min-h-0">
                       <Send size={18} />
                     </button>

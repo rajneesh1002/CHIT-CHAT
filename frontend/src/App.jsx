@@ -1,4 +1,3 @@
-
 import Navbar from './components/Navbar'
 import HomePage from './Pages/HomePage'
 import SignUpPage from './Pages/SignUpPage'
@@ -6,20 +5,34 @@ import LoginPage from './Pages/LoginPage'
 import SettingsPage from './Pages/SettingsPage'
 import ProfilePage from './Pages/ProfilePage'
 
-import {Routes, Route, Navigate} from "react-router-dom"
+import {Routes, Route, Navigate, useLocation} from "react-router-dom"
 import { useAuthStore } from './store/useAuthStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 import {Toaster} from 'react-hot-toast'
 import { Loader } from 'lucide-react'
 import { useThemeStore } from './store/useThemeStore'
+import { useChatStore } from './store/useChatStore'
 
 
 const App = () => {
-  const {authUser,checkAuth,isCheckingAuth, onlineUsers}=useAuthStore()
+  const {authUser,checkAuth,isCheckingAuth, }=useAuthStore()
   const {theme}=useThemeStore();
 
+  const { selectedUser } = useChatStore();
+  const location = useLocation();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 550);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 550);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const shouldShowNavbar = !(
+    location.pathname === "/" && selectedUser && isMobile
+  );
 
   useEffect(()=>{
     checkAuth();
@@ -35,9 +48,9 @@ const App = () => {
   )
   return (
     <div data-theme={theme}>
-    <Navbar/>
+    {shouldShowNavbar && <Navbar />}
        <Routes>
-        <Route path='/' element={authUser? <HomePage/> : <Navigate to="/login"/>}/>
+        <Route path='/' element={authUser? <HomePage showPaddingTop={shouldShowNavbar}/> : <Navigate to="/login"/>}/>
         <Route path='/signup' element={!authUser ? <SignUpPage/> : <Navigate to="/"/>}/>
         <Route path='/login' element={!authUser? <LoginPage/> : <Navigate to="/"/>}/>
         <Route path='/settings' element={<SettingsPage/>}/>
