@@ -11,7 +11,7 @@ const HomePage = ({ showPaddingTop }) => {
           showPaddingTop ? "pt-20" : "pt-4"
         } px-4`}
       >
-        <div className="bg-base-100 rounded-lg shadow-lg w-full max-w-6xl h-[calc(100vh-8rem)]" >
+        <div className={`bg-base-100 rounded-lg shadow-lg w-full max-w-6xl ${showPaddingTop? "h-[calc(100vh-6rem)]": " h-[calc(100vh-2rem)]"} `} >
           <div className="flex h-full rounded-lg overflow-hidden">
          
             <div className={`w-full sm:w-1/3 lg:w-1/4 ${selectedUser ? "hidden" : "block"} sm:block`}>
