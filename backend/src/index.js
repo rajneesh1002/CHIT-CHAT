@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173", 
-  "https://polite-scone-12098a.netlify.app",
+  "raj11-chitchat.netlify.app", 
 ];
 
 app.use(
