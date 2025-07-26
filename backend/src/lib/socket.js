@@ -8,7 +8,7 @@ const server=http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "raj11-chitchat.netlify.app"], //mgvs
+    origin: ["http://localhost:5173", "https://raj11-chitchat.netlify.app"], 
     credentials: true,
     methods: ["GET", "POST"],
   },
